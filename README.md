@@ -553,3 +553,56 @@ First, rather than declaring local variables, constructor functions persist data
 
 ##### Creating a New Object
 Let's use the `new` operator to create a new object:
+```javascript
+let developr = new SoftwareDeveloper();
+
+console.log(developer);
+\\ SoftwareDeveloper{favoriteLanguage: "JavaScript"}
+```
+We've saved the return value of this invocation to the variable `developer`.
+
+##### Creating Multiple Objects
+Let's invoke the same `SoftwareDeveloper()` constructor two more times to instantiate two additional objects: `engineer` and `programmer`.
+```javascript
+let engineer = new SoftwareDeveloper();
+let programmer = new SoftwareDeveloper();
+
+console.log(engineer);
+// SoftwareDeveloper { favoriteLanguage: 'JavaScript' }
+
+console.log(programmer);
+// SoftwareDeveloper { favoriteLanguage: 'JavaScript' }
+```
+
+##### Constructor Functions Can Have Parameters
+```javascript
+function SoftwareDeveloper(name) {
+  this.favoriteLanguage = 'JavaScript';
+  this.name = name;
+}
+
+let instructor = new SoftwareDeveloper('Andrew');
+
+console.log(instructor);
+// SoftwareDeveloper { favoriteLanguage: 'JavaScript', name: 'Andrew' }
+
+```
+### 3.2 The `this` Keyword
+##### `this` in Constructor Functions
+```javascript
+function Cat(name) {
+ this.name = name;
+ this.sayName = function () {
+   console.log(`Meow! My name is ${this.name}`);
+ };
+}
+
+const bailey = new Cat('Bailey');
+```
+As it turns out, when invoking a constructor function with the `new` operator, `this` gets set to the newly-created object!
+
+##### What Does `this` Get Set To?
+|**Call Style**| `new` | method | function |
+|--------------|-------|--------|----------|
+|**`this`**    | {}    |object itsels| global object |
+|**Example**|new Cat()|bailey.sayName()|introduce()|
