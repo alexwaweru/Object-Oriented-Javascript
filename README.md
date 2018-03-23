@@ -539,3 +539,17 @@ To instantiate (i.e., create) a new object, we use the new operator to invoke th
 ```javascript
 new SoftwareDeveloper();
 ```
+What does make `SoftwareDeveloper` a constructor function are:
+- The use of the `new` operator to invoke the function
+- How the function is coded internally (which we'll look at right now!)
+
+##### Constructor Functions Structure and Syntax
+```javascript
+function SoftwareDeveloper() {
+  this.favoriteLanguage = 'JavaScript';
+}
+```
+First, rather than declaring local variables, constructor functions persist data with the `this` keyword. The above function will add a `favoriteLanguage` property to any object that it creates, and assigns it a default value of `'JavaScript'`. Don't worry too much about `this` in a constructor function for now; just know that `this` refers to the `new` object that was created by using the `new` keyword in front of the constructor function.
+
+##### Creating a New Object
+Let's use the `new` operator to create a new object:
