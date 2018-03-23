@@ -606,3 +606,50 @@ As it turns out, when invoking a constructor function with the `new` operator, `
 |--------------|-------|--------|----------|
 |**`this`**    | {}    |object itsels| global object |
 |**Example**|new Cat()|bailey.sayName()|introduce()|
+
+### 3.3 Setting Our Own `this`
+##### More Ways to Invoke Functions
+We've seen various ways to invoke functions, each with their own implications regarding the value of `this`. There are yet two more ways to invoke a function: either using the `call()` or the `apply()` methods.
+
+##### call()
+`call()` is a method directly invoked onto a function. We first pass into it in a single value to set as the value of `this`; then we pass in any of the receiving function's arguments one-by-one, separated by commas.
+
+Consider the following function, `multiply()`, which simply returns the product of its two arguments:
+```javascript
+function multiply(n1, n2) {
+  return n1 * n2;
+}
+
+multiply(3, 4);
+// 12
+```
+No surprises here! But now -- let's use the `call()` method to invoke the same function:
+```javascript
+multiply.call(window, 3, 4);
+// 12
+```
+Another example, consider the `mockingbird` object:
+```javascript
+const mockingbird = {
+  title: 'To Kill a Mockingbird',
+  describe: function () {
+    console.log(`${this.title} is a classic novel`);
+  }
+};
+
+mockingbird.describe();
+// 'To Kill a Mockingbird is a classic novel'
+
+const pride = {
+  title: 'Pride and Prejudice'
+};
+
+mockingbird.describe.call(pride);
+// 'Pride and Prejudice is a classic novel'
+```
+In the first call of `mockingbird.describe` `this` is set to the newly created mockingbird object. In the second call, `this` is set to the `pride` object.
+
+##### apply()
+The difference between call and apply is that after entering the `this` parameter call takes all other parameters separated by a comma while apply takes a sing array of all other parameters
+
+### 3.4 Prototypal Inheritance
