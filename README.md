@@ -653,3 +653,15 @@ In the first call of `mockingbird.describe` `this` is set to the newly created m
 The difference between call and apply is that after entering the `this` parameter call takes all other parameters separated by a comma while apply takes a sing array of all other parameters
 
 ### 3.4 Prototypal Inheritance
+To save memory and keep things DRY, we can add methods to the constructor function's `prototype`'s property. The prototype is just an object, and all objects created by a constructor function keep a reference to the `prototype`. Those objects can even use the prototype's properties as their own!
+
+JavaScript leverages this secret link -- between an object and its prototype -- to implement inheritance.
+
+Recall that each function has a `prototype` property, which is really just an object. When this function is invoked as a constructor using the `new `operator, it creates and returns a new object. This object is secretly linked to its constructor's `prototype`, and this secret link allows the object to access the `prototype`'s properties and methods as if it were its own!
+
+Since we know that the `prototype` property just points to a regular object, that object itself also has a secret link to its `prototype`. And that prototype object also has reference to its own `prototype` -- and so on. This is how the **prototype chain** is formed.
+
+### 3.5 Prototypal Inheritance: Subclasses
+One of the benefits of implementing inheritance is that it allows you to reuse existing code. By establishing inheritance, we can **subclass**, that is, have a "child" object take on most or all of a "parent" object's properties while retaining unique properties of its own.
+
+Let's say we have a parent `Animal` object, which contains properties like `age` and `weight`. That same Animal object can also access methods like `eat` and `sleep`.
