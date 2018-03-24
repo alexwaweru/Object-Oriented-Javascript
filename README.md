@@ -673,3 +673,88 @@ Not only can `Cat` take on properties and methods of `Animal`, we can also give 
 By using prototypal inheritance, `Cat` only needs to implement `Cat`-specific functionality, and just reuse `Animal`'s existing functionality.
 
 #### Inheritance vs Prototypes
+When calling any property on any object, the JavaScript engine will first look for the property in the object itself (i.e., the object's own, non-inherited properties). If the property is not found, JavaScript will then look at the object's prototype. If the property still isn't found in the object's prototype, JavaScript will continue the search up the prototype chain.
+
+Again, inheritance in JavaScript is all about setting up this chain!
+
+#### The Secret Link
+As you know, an object's constructor function's prototype is first place searched when the JavaScript engine tries to access a property that doesn't exist in the object itself. Consider the following `bear` object with two properties, `claws` and `diet`:
+```javascript
+const bear = {
+  claws: true,
+  diet: 'carnivore'
+};
+```
+We'll assign the following PolarBear() constructor function's prototype property to bear:
+```javascript
+function PolarBear() {
+  // ...
+}
+
+PolarBear.prototype = bear;
+```
+Let's now call the `PolarBear()` constructor to create a new object, then give it two properties:
+```javascript
+const snowball = new PolarBear();
+
+snowball.color = 'white';
+snowball.favoriteDrink = 'cola';
+```
+This is how the snowball object looks at this point:
+```javascript
+{
+  color: 'white',
+  favoriteDrink: 'cola'
+}
+```
+Note that snowball has just two properties of its own: `color` and `favoriteDrink`. However, snowball also has access to properties that don't exist inside it: `claws` and `diet`:
+```javascript
+console.log(snowball.claws);
+// true
+
+console.log(snowball.diet);
+// 'carnivore'
+```
+Since `claws` and `diet` both exist as properties in the prototype object, they are looked up because objects are secretly linked to their constructor's prototype property.
+
+#### Object.create()
+At this point, we've reached a few roadblocks when it comes to inheritance. First, even though `__proto__` can access the prototype of the object it is called on, using it in any code you write is not good practice.
+
+What's more: we also shouldn't inherit only the prototype; this doesn't set up the prototype chain, and any changes that we made to a child object will also be reflected in a parent object.
+
+So how should we move forward?
+
+There's actually a way for us to set up the prototype of an object ourselves: using `Object.create()`. And best of all, this approach lets us manage inheritance without altering the prototype!
+
+  Object.create() takes in a single object as an argument, and returns a new object with its `__proto__` property set to what argument is passed into it. From that point, you simply set the returned object to be the prototype of the child object's constructor function. Let's check out an example!
+
+First, let's say we have a `mammal` object with two properties: `vertebrate` and `earBones`:
+```javascript
+const mammal = {
+  vertebrate: true,
+  earBones: 3
+};
+```
+Recall that `Object.create()` takes in a single object as an argument, and returns a new object. That new object's `__proto__` property is set to whatever was originally passed into `Object.create()`. Let's save that returned value to a variable, `rabbit`:
+```javascript
+const rabbit = Object.create(mammal);
+```
+We expect the new `rabbit` object to be blank, with no properties of its own:
+```javascript
+console.log(rabbit);
+// {}
+```
+However, `rabbit` should now be secretly linked to `mammal`. That is, its `__proto__` property should point to `mammal`:
+```javascript
+console.log(rabbit.__proto__ === mammal);
+
+// true
+```
+Great! This means that now, `rabbit` extends `mammal` (i.e., `rabbit` inherits from `mammal`). As a result, `rabbit` can access `mammal`'s properties as if it were its own!
+```javascript
+console.log(rabbit.vertebrate);
+// true
+
+console.log(rabbit.earBones);
+// 3
+```
