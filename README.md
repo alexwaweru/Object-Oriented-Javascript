@@ -758,3 +758,4 @@ console.log(rabbit.vertebrate);
 console.log(rabbit.earBones);
 // 3
 ```
+`Object.create()` gives us a clean method of establishing prototypal inheritance in JavaScript. We can easily extend the prototype chain this way, and we can have objects inherit from just about any object we want! 
