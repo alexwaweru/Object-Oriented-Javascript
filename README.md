@@ -665,3 +665,11 @@ Since we know that the `prototype` property just points to a regular object, tha
 One of the benefits of implementing inheritance is that it allows you to reuse existing code. By establishing inheritance, we can **subclass**, that is, have a "child" object take on most or all of a "parent" object's properties while retaining unique properties of its own.
 
 Let's say we have a parent `Animal` object, which contains properties like `age` and `weight`. That same Animal object can also access methods like `eat` and `sleep`.
+
+Now, let's also say that we want to create a `Cat` child object. Just like you can with other animals, you can also describe a cat by its *age* or *weight*, and you can also be certain that the cat *eats* and *sleeps* as well. When creating that `Cat` object, then, we can simply re-write and re-implement all those methods and properties from `Animal` -- or, we can save some time and prevent repeated code by having `Cat` inherit those existing properties and methods from `Animal`!
+
+Not only can `Cat` take on properties and methods of `Animal`, we can also give `Cat` its own unique properties and methods as well! Perhaps a `Cat` has a unique lives property of `9`, or it has a specialized `meow()` method that no `Animal` has.
+
+By using prototypal inheritance, `Cat` only needs to implement `Cat`-specific functionality, and just reuse `Animal`'s existing functionality.
+
+#### Inheritance vs Prototypes
