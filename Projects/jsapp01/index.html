@@ -1,0 +1,59 @@
+<htm>
+  <head>
+    <meta charset="utf-8">
+    <title> JS Issue Tracker</title>
+    <!-- Latest compiled and minified CSS bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body onload="fetchIssues()">
+    <!-- Container for the entire body -->
+    <div class="container">
+      <h1>JS Issue Tracker <small>by Alex Waweru</small></h1>
+      <div class="jumbotron">
+        <h3>Add New Issue</h3>
+        <!-- Issue Submission form -->
+        <form id="issueInputForm"class="" action="index.html" method="post">
+          <!-- Issue Description Input -->
+          <div class="form-group">
+            <label for="issueDescInput">Description</label>
+            <input type="text" class="form-control" id="issueDescInput" placeholder="Describe the issue..."name="" value="">
+          </div>
+          <!-- Issue Severity Input -->
+          <div class="form-group">
+            <label for="issueSeverityInput">Severity</label>
+            <select id="issueSeverityInput" class="form-control" name="">
+              <option value="Low">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <!-- Assigned To Input -->
+          <div class="form-group">
+            <label for="issueAssignedToInput">Assigned To</label>
+            <input type="text" class="form-control" id="issueAssignedToInput" placeholder="Enter responsible..."name="" value="">
+          </div>
+          <!-- Adding issue button-->
+          <button type="submit" class="btn btn-primary" name="button">Add</button>
+        </form>
+      </div>
+      <!-- List of issues div -->
+      <div class="col-lg-12">
+        <div id="issueList">
+        </div>
+      </div>
+      <!-- Footer section -->
+      <div class="footer">
+        <p>&copy Alex Waweru</p>
+      </div>
+    </div>
+
+    <!-- Latest compiled and minified Javascript chance -->
+    <script src="http://chancejs.com/chance.min.js"></script>
+    <!-- Latest compiled and minified Javascript jquery -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified Javascript bootstrap -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <!-- Main javascript file -->
+    <script src="main.js"></script>
+  </body>
+</htm>
